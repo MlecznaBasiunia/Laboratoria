@@ -1,1 +1,46 @@
-upo
+
+init = function()
+  
+  player_x = 0
+  player_y = -60
+
+  player_w = 16
+  player_h = 16
+
+  player_speed = 5
+
+  bound_x = 200 - player_w / 2
+  bound_y = 75  - player_h / 2
+end
+
+update = function()
+  // polling bratku
+  if keyboard.LEFT then
+    player_x -= player_speed
+  end
+
+  if keyboard.RIGHT then
+    player_x += player_speed
+  end
+
+  if keyboard.UP then
+    player_y += player_speed
+  end
+
+  if keyboard.DOWN then
+    player_y -= player_speed
+  end
+
+  // clamping
+  if player_x < -bound_x then player_x = -bound_x end
+  if player_x >  bound_x then player_x =  bound_x end
+  if player_y < -bound_y then player_y = -bound_y end
+  if player_y >  bound_y then player_y =  bound_y end
+end
+
+draw = function()
+  
+  screen.clear("black") // bez tego zostają klatki na ekranie XD
+
+  screen.drawSprite("player", player_x, player_y, player_w, player_h)
+end
